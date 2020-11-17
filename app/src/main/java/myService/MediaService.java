@@ -8,13 +8,15 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
 import androidx.annotation.Nullable;
-import com.example.musicplayer.R;
 import java.io.IOException;
 import java.util.ArrayList;
+import Model.Music;
+import Model.MusicInfo;
 
 public class MediaService extends Service {
     private MediaPlayer mediaPlayer=new MediaPlayer();
-    private ArrayList<Integer> musicList=new ArrayList<>();
+    private MusicInfo musicInfo=new MusicInfo();
+    private ArrayList<Music> musicList;
     private int i=0;
     private MyBinder myBinder=new MyBinder();
 
@@ -29,7 +31,7 @@ public class MediaService extends Service {
         super.onCreate();
         Log.e("MediaPlay","onCreate");
         initMusicList();
-        initMediaPlayerFile(musicList.get(i));
+        initMediaPlayerFile(musicList.get(i).getMusicId());
     }
 
     private void initMediaPlayerFile(int index) {
@@ -43,10 +45,7 @@ public class MediaService extends Service {
     }
 
     private void initMusicList(){
-        musicList.add(R.raw.actor);
-        musicList.add(R.raw.fallintosea);
-        musicList.add(R.raw.rise);
-        musicList.add(R.raw.music);
+        musicList=musicInfo.getMusicInfo();
     }
 
     public class MyBinder extends Binder{
@@ -62,6 +61,14 @@ public class MediaService extends Service {
             mediaPlayer.seekTo(minute);
         }
 
+        public String getTitle(){
+            return musicList.get(i).getTitle();
+        }
+
+        public String getAuthor(){
+            return  musicList.get(i).getAuthor();
+        }
+
         public void playMusic(){
             if(!mediaPlayer.isPlaying()){
                 mediaPlayer.start();
@@ -75,14 +82,14 @@ public class MediaService extends Service {
         }
 
         public void nextMusic(){
-            if(mediaPlayer!=null&&i>=0&&i<4){
+            if(mediaPlayer!=null&&i>=0&&i<musicList.size()){
                 mediaPlayer.reset();
                 if(i==3){
                     i=0;
-                    initMediaPlayerFile(musicList.get(i));
+                    initMediaPlayerFile(musicList.get(i).getMusicId());
                 }else {
                     i++;
-                    initMediaPlayerFile(musicList.get(i));
+                    initMediaPlayerFile(musicList.get(i).getMusicId());
                 }
             }
             playMusic();
@@ -92,11 +99,11 @@ public class MediaService extends Service {
             if(mediaPlayer!=null&&i>=0&&i<4){
                 mediaPlayer.reset();
                 if(i==0){
-                    i=3;
+                    i=musicList.size()-1;
                 }else{
                     i--;
                 }
-                initMediaPlayerFile(musicList.get(i));
+                initMediaPlayerFile(musicList.get(i).getMusicId());
             }
             playMusic();
         }

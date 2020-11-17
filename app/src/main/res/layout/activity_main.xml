@@ -1,68 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#8B8989"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
+        app:titleTextColor="#fff"
+        app:subtitleTextColor="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="30dp"
+        android:id="@+id/coverView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"/>
+
     <LinearLayout
+        android:layout_marginTop="60dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <Button
+        <TextView
+            android:id="@+id/timeTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/preciousButton"
-            android:text="上一首" />
-        <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/playButton"
-        android:text="播放" />
+            android:layout_marginLeft="10dp"
+            android:textColor="#fff" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/pauseButton"
-            android:text="暂停" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/nextButton"
-            android:text="下一首" />
-    </LinearLayout>
         <SeekBar
             android:id="@+id/seekBar"
-            android:layout_width="350dp"
+            android:layout_marginStart="10dp"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp" />
-    <TextView
-        android:layout_marginTop="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_width="wrap_content"
+            android:background="#828282" />
+
+        <TextView
+            android:id="@+id/timeEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#fff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="当前播放时间:"
-        android:id="@+id/contentTxt"
-        />
-    <TextView
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/timeTxt"
-        />
+        android:layout_marginTop="40dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/preciousButton"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="65dp"
+            android:background="@drawable/ic_precious" />
+
+        <Button
+            android:layout_marginLeft="30dp"
+            android:id="@+id/playButton"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:background="@drawable/button_selector" />
 
 
-
-
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_marginLeft="30dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_precious"
+            android:rotation="180" />
+    </LinearLayout>
 
 
 </LinearLayout>
